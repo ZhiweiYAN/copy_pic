@@ -29,7 +29,7 @@ import time
 FILE_NAME_SPLIT_BLOCK_NUM = 2
 FILE_NAME_SPLIT_SEPARATOR = '_'
 PATH_SEPARATOR  = "/"
-WILD_FILE_PATTERN = "*.bmp"
+WILD_FILE_PATTERN = "*.jpg"
 SLEEP_TIME_DURATION = 5
 LINE_SEPARATOR_CHAR = '*'
 LINE_SEPARATOR_CHAR_NUM = 60
@@ -42,14 +42,16 @@ def list_file(d):
 if __name__ == '__main__':
 
     # input the source root directory and the destination root directory
-    src_root_dir = raw_input("The source root directory (/home/from/): ")
-    des_root_dir = raw_input("The destination root directory (/home/to/): ")
+    src_root_dir = raw_input("The source root directory [/home/from/]: ") or "/home/ftp_weixin_photo/photo/"
+    des_root_dir = raw_input("The destination root directory [/home/to/]: ") or "/root/photo/"
 
+    print LINE_SEPARATOR_CHAR * LINE_SEPARATOR_CHAR_NUM
     print 'From ' + src_root_dir + ' To ' + des_root_dir
 
     while True:
+        time.sleep(SLEEP_TIME_DURATION)
         print LINE_SEPARATOR_CHAR * LINE_SEPARATOR_CHAR_NUM
-        print time.ctime()
+        print time.ctime() 
 
         # get file name list in the source root dir
         file_list = list_file(src_root_dir + WILD_FILE_PATTERN)
@@ -57,6 +59,8 @@ if __name__ == '__main__':
         if not file_list:
             time.sleep(SLEEP_TIME_DURATION)
             continue
+        else:
+            print file_list
 
         # copy the file if the file name is correct, such as AB001_BABY002_0004.bmp
         for file_fullname in file_list:
